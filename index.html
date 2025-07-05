@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             width: 100%;
-            min-height: 100%;
+            min-height: 100vh;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background: linear-gradient(to right, #1a1a2e, #16213e);
             color: #e0e0e0;
@@ -32,7 +32,8 @@
 
         .container {
             text-align: center;
-            width: 600px;
+            width: 100%;
+            max-width: 700px; /* Responsive width */
             flex-shrink: 0;
         }
 
@@ -105,7 +106,7 @@
             display: flex;
             justify-content: center;
             gap: 20px;
-            flex-wrap: nowrap;
+            flex-wrap: wrap; /* Allow buttons to wrap on small screens */
         }
 
         .choice-btn {
@@ -132,11 +133,13 @@
 
         .banner-image {
             max-height: 500px;
+            width: 100%;
+            object-fit: cover;
             border-radius: 15px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
         }
 
-        /* --- CSS cho các khu vực nội dung sau khi chọn HĐH --- */
+        /* --- CSS for result sections --- */
         .result-section {
             margin-top: 40px;
             opacity: 0;
@@ -149,11 +152,14 @@
             transform: translateY(0);
         }
         
+        /* --- NEW STYLE for download images (Android & Windows) --- */
         .download-image {
-            max-width: 100%;
+            max-width: 400px; /* Set a max-width to make it smaller */
+            width: 90%; /* Make it responsive within the container */
+            display: block; /* Allows margin auto to work */
+            margin: 25px auto; /* Center the image */
             border-radius: 12px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-            margin-bottom: 25px;
         }
         
         .download-text {
@@ -163,6 +169,7 @@
 
         .download-link {
             display: inline-block;
+            margin-top: 15px;
             margin-left: 10px;
             background-color: #2ecc71;
             color: #ffffff;
@@ -178,7 +185,7 @@
             transform: translateY(-2px);
         }
         
-        /* --- NEW --- CSS cho thông báo của macOS --- */
+        /* --- CSS for macOS notice --- */
         .notice-text {
             font-size: 1.5em;
             font-weight: bold;
@@ -189,16 +196,36 @@
             display: inline-block;
         }
 
+        /* --- RESPONSIVE STYLES --- */
         @media (max-width: 1024px) {
             .page-wrapper {
                 flex-direction: column;
+                padding: 20px;
             }
              #bannerContainer {
-                display: none;
-            }
-             .container {
+                order: -1; /* Move banner to the top */
+                margin-bottom: 40px;
                 width: 100%;
-                max-width: 700px;
+                max-width: 450px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #mainTitle {
+                font-size: 1.8em;
+            }
+            .page-header img {
+                height: 50px;
+            }
+            #featureList li {
+                font-size: 1em;
+            }
+            #infoPanel h2 {
+                font-size: 1.2em;
+            }
+            .choice-btn {
+                width: 100%;
+                box-sizing: border-box;
             }
         }
     </style>
@@ -241,7 +268,7 @@
                 <img src="https://img.hh4khq.xyz/desk.png" alt="Giao diện trên Desktop" class="download-image">
                 <p class="download-text">
                     File cài đặt cho Windows:
-                    <a href="#" class="download-link">Tải xuống ⬇️</a>
+                    <a href="https://src.hh4khq.xyz/hh4khq.exe" class="download-link">Tải xuống ⬇️</a>
                 </p>
             </section>
             
@@ -267,27 +294,33 @@
         document.addEventListener('DOMContentLoaded', function() {
             const initialContent = document.getElementById('initial-content');
             const banner = document.getElementById('bannerContainer');
-            // Lấy tất cả các nút lựa chọn HĐH
             const osButtons = document.querySelectorAll('.choice-btn');
 
-            // Lặp qua từng nút và gán sự kiện click
             osButtons.forEach(button => {
                 button.addEventListener('click', function(event) {
                     event.preventDefault();
 
-                    // Lấy tên HĐH từ thuộc tính 'data-os'
-                    const os = event.target.dataset.os; 
-                    // Tìm khu vực kết quả tương ứng (ví dụ: 'windows-section')
+                    const os = event.target.dataset.os;
+                    const allSections = document.querySelectorAll('.result-section');
                     const targetSection = document.getElementById(os + '-section');
+                    
+                    // Hide all sections first to handle back-and-forth clicks
+                    allSections.forEach(s => {
+                        s.classList.add('hidden');
+                        s.classList.remove('visible');
+                    });
 
                     if (targetSection) {
-                        // Ẩn nội dung ban đầu và banner
                         initialContent.classList.add('hidden');
-                        banner.classList.add('hidden');
+                        
+                        // Only hide the main banner if a selection is made
+                        if(window.innerWidth > 1024) {
+                           banner.classList.add('hidden');
+                        }
 
-                        // Hiển thị khu vực kết quả tương ứng
                         targetSection.classList.remove('hidden');
                         
+                        // Use a short timeout to allow the display property to change before starting the transition
                         setTimeout(() => {
                             targetSection.classList.add('visible');
                         }, 50);
