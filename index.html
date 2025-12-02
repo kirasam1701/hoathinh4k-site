@@ -3,332 +3,592 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tải ứng dụng HoatHinh4kHQ để trải nghiệm phim hoạt hình chất lượng 4K HQ. Hỗ trợ Windows, Android, và macOS.">
+    <meta name="description" content="Tải ứng dụng HoatHinh4kHQ để trải nghiệm phim hoạt hình chất lượng 4K HQ. Hỗ trợ Windows, Android và macOS.">
     <title>HoatHinh4kHQ - Tải Ứng Dụng</title>
     <style>
+        :root {
+            --bg-main: #050816;
+            --bg-main-2: #0b1220;
+            --bg-panel: #0f172a;
+            --bg-soft: #111827;
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+            --accent: #38bdf8;
+            --accent-soft: #0ea5e9;
+            --border-soft: rgba(148,163,184,0.4);
+            --link: #38bdf8;
+            --link-hover: #7dd3fc;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
             min-height: 100vh;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(to right, #1a1a2e, #16213e);
-            color: #e0e0e0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px;
-            box-sizing: border-box;
+            background: radial-gradient(circle at top, var(--bg-main-2), var(--bg-main));
+            color: var(--text-main);
         }
-        
-        .page-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 50px;
-            width: 100%;
+
+        a {
+            color: var(--link);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--link-hover);
+            text-decoration: underline;
+        }
+
+        /* HEADER */
+        .top-bar {
             max-width: 1200px;
+            margin: 0 auto;
+            padding: 18px 16px 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .container {
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand img {
+            height: 52px;
+        }
+
+        .brand-title {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        .brand-title span.hoat { color: #f4b000; }
+        .brand-title span.hinh { color: #1fb954; }
+        .brand-title span.k4  { color: #38bdf8; }
+        .brand-title span.hq  { color: #e76bf3; }
+
+        .top-bar-right img {
+            height: 40px;
+        }
+
+        /* MAIN LAYOUT */
+        .page-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 16px 40px 16px;
+        }
+
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .hero-left {
+            flex: 1 1 360px;
+            min-width: 0;
+        }
+
+        .hero-right {
+            flex: 0 0 330px;
             text-align: center;
-            width: 100%;
-            max-width: 700px; /* Responsive width */
-            flex-shrink: 0;
         }
 
-        .page-header {
+        .hero-avatar {
+            width: 170px;
+            height: 170px;
+            border-radius: 0; /* ô vuông */
+            background: radial-gradient(circle at top, #38bdf8, #0f172a);
+            margin: 0 auto 12px auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 12px 35px rgba(15,23,42,0.9);
         }
 
-        .page-header img {
-            height: 60px;
-            transition: transform 0.3s ease;
-        }
-
-        #mainTitle {
-            font-size: 2.2em;
-            font-weight: bold;
-        }
-
-        #mainTitle span.hoat { color: gold; }
-        #mainTitle span.hinh { color: limegreen; }
-        #mainTitle span.k4 { color: deepskyblue; }
-        #mainTitle span.hq { color: violet; }
-        
-        .hidden {
-            display: none !important;
-        }
-        
-        #featureList {
-            list-style: none;
-            padding: 25px 35px;
-            margin: 0 auto 40px auto;
-            border-radius: 12px;
-            background-color: #0f3460;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid #2a3a5c;
-            text-align: left;
-            display: inline-block;
-        }
-
-        #featureList li {
-            padding: 10px 0 10px 35px;
-            position: relative;
-            font-size: 1.1em;
-            line-height: 1.5;
-        }
-
-        #featureList li::before {
-            content: '✓';
-            color: #00f2a1;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            top: 10px;
-        }
-
-        #infoPanel {
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
-        }
-
-        #osChoices {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap; /* Allow buttons to wrap on small screens */
-        }
-
-        .choice-btn {
-            display: inline-block;
-            background-color: #ffffff;
-            color: #3498db;
-            border: 2px solid #3498db;
-            padding: 15px 30px;
-            text-decoration: none;
-            font-size: 1.1em;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s, transform 0.2s;
-            min-width: 150px;
-        }
-
-        .choice-btn:hover {
-            background-color: #3498db;
-            color: #ffffff;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
-        }
-
-        .banner-image {
-            max-height: 500px;
+        .hero-avatar img {
             width: 100%;
+            height: 100%;
             object-fit: cover;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
         }
 
-        /* --- CSS for result sections --- */
-        .result-section {
+        .hero-bubble {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #ec4899, #f97316);
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .hero-text-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .hero-text-body {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        /* DOWNLOAD PANEL */
+        .download-panel {
+            margin-top: 26px;
+            padding: 26px 24px;
+            border-radius: 26px;
+            background: radial-gradient(circle at top, #1d2a3f, #030712);
+            border: 1px solid rgba(148,163,184,0.5);
+            box-shadow: 0 18px 40px rgba(15,23,42,0.9);
+        }
+
+        .download-panel-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .download-cols {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 24px;
+            font-size: 14px;
+        }
+
+        .download-col h3 {
+            margin: 0 0 8px 0;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #e5e7eb;
+        }
+
+        .download-col ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+            color: var(--text-muted);
+        }
+
+        .download-col li {
+            margin-bottom: 4px;
+        }
+
+        .download-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 11px;
+            background-color: rgba(148,163,184,0.25);
+            color: #e5e7eb;
+        }
+
+        /* ===== VIP PRICING CARDS ===== */
+        .vip-section {
             margin-top: 40px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        
-        .result-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* --- NEW STYLE for download images (Android & Windows) --- */
-        .download-image {
-            max-width: 400px; /* Set a max-width to make it smaller */
-            width: 90%; /* Make it responsive within the container */
-            display: block; /* Allows margin auto to work */
-            margin: 25px auto; /* Center the image */
-            border-radius: 12px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-        }
-        
-        .download-text {
-            font-size: 1.2em;
-            color: #ecf0f1;
+            text-align: center;
         }
 
-        .download-link {
-            display: inline-block;
-            margin-top: 15px;
-            margin-left: 10px;
-            background-color: #2ecc71;
+        .vip-section-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 22px;
+            color: #f9fafb;
+        }
+
+        .vip-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 18px;
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        .vip-card {
+            position: relative;
+            padding: 26px 10px 22px;
+            border-radius: 18px;
+            background: radial-gradient(circle at top, #1b2940 0%, #020617 70%);
+            border: 2px solid #f6d47a;
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.85);
             color: #ffffff;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-        
-        .download-link:hover {
-            background-color: #27ae60;
-            transform: translateY(-2px);
-        }
-        
-        /* --- CSS for macOS notice --- */
-        .notice-text {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #ecf0f1;
-            background-color: #2c3e50;
-            padding: 40px 60px;
-            border-radius: 12px;
-            display: inline-block;
+            text-align: center;
+            overflow: hidden;
         }
 
-        /* --- RESPONSIVE STYLES --- */
-        @media (max-width: 1024px) {
-            .page-wrapper {
-                flex-direction: column;
-                padding: 20px;
-            }
-             #bannerContainer {
-                order: -1; /* Move banner to the top */
-                margin-bottom: 40px;
-                width: 100%;
-                max-width: 450px;
+        .vip-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(circle at top, rgba(246,212,122,0.25), transparent 55%);
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        .vip-card-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .vip-card-title {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            margin-bottom: 10px;
+        }
+
+        .vip-card-sub {
+            font-size: 14px;
+            letter-spacing: 0.08em;
+            margin-bottom: 26px;
+        }
+
+        .vip-card-price {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .vip-card-usd {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+
+        .vip-badge {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            padding: 3px 10px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border-radius: 999px;
+            background: rgba(246,212,122,0.18);
+            border: 1px solid rgba(246,212,122,0.6);
+            color: #ffe9a3;
+            z-index: 2;
+        }
+
+        .vip-note {
+            margin-top: 16px;
+            font-size: 13px;
+            color: #d1d5db;
+            opacity: 0.9;
+        }
+
+        .vip-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.95);
+            transition: all 0.18s ease-out;
+        }
+
+        /* INFO SECTIONS */
+        .info-sections {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background-color: var(--bg-panel);
+            border-radius: 14px;
+            padding: 20px 22px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.85);
+            font-size: 14px;
+            line-height: 1.7;
+            border: 1px solid var(--border-soft);
+        }
+
+        .info-card h2 {
+            font-size: 18px;
+            margin: 0 0 10px 0;
+        }
+
+        .info-card p {
+            color: var(--text-muted);
+        }
+
+        .info-card ul {
+            margin: 8px 0 0 18px;
+            padding: 0;
+            color: var(--text-muted);
+        }
+
+        .info-card li {
+            margin-bottom: 6px;
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: 30px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(55,65,81,0.9);
+            font-size: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+        }
+
+        .support {
+            font-weight: 500;
+            color: #e5e7eb;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1100px) {
+            .vip-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
             }
         }
 
-        @media (max-width: 768px) {
-            #mainTitle {
-                font-size: 1.8em;
+        @media (max-width: 900px) {
+            .download-cols {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
-            .page-header img {
-                height: 50px;
+
+            .info-sections {
+                grid-template-columns: 1fr;
             }
-            #featureList li {
-                font-size: 1em;
+
+            .hero {
+                flex-direction: column-reverse;
             }
-            #infoPanel h2 {
-                font-size: 1.2em;
+
+            .hero-right {
+                align-self: center;
             }
-            .choice-btn {
-                width: 100%;
-                box-sizing: border-box;
+
+            .vip-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .download-cols {
+                grid-template-columns: 1fr;
+            }
+
+            .brand-title {
+                font-size: 22px;
+            }
+
+            .top-bar {
+                padding-top: 12px;
+            }
+
+            .vip-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vip-card {
+                padding: 22px 12px 20px;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="page-wrapper">
-        <main class="container">
-            <header class="page-header">
-                <img src="https://img.hh4khq.xyz/natra.png" alt="Natra Logo">
-                <h1 id="mainTitle">
-                    <span class="hoat">Hoat</span><span class="hinh">Hinh</span><span class="k4">4k</span><span class="hq">HQ</span>
-                </h1>
-            </header>
-
-            <div id="initial-content">
-                <section>
-                    <ul id="featureList">
-                        <li>Không quảng cáo</li>
-                        <li>Đồ hoạ chuẩn 4k HQ, không nén</li>
-                        <li>Hỗ trợ HDR, 10 Bit, tăng tốc phần cứng</li>
-                        <li>Âm thanh đa dạng, chuẩn DP 2.1 và 5.1</li>
-                        <li>Phụ đề, thuyết minh, song ngữ tuỳ chọn</li>
-                        <li>Cài đặt và đăng ký đơn giản</li>
-                    </ul>
-                </section>
-                <section>
-                    <div id="infoPanel">
-                        <h2>Vui lòng chọn hệ điều hành</h2>
-                    </div>
-                    <div id="osChoices">
-                        <a href="#" class="choice-btn" data-os="windows">Windows</a>
-                        <a href="#" class="choice-btn" data-os="android">Android</a>
-                        <a href="#" class="choice-btn" data-os="macos">macOS</a>
-                    </div>
-                </section>
+    <!-- HEADER -->
+    <header class="top-bar">
+        <div class="brand">
+            <img src="https://img.hh4khq.xyz/natra.png" alt="HoatHinh4kHQ Logo">
+            <div class="brand-title">
+                <span class="hoat">Hoat</span><span class="hinh">Hinh</span><span class="k4">4k</span><span class="hq">HQ</span>
             </div>
-            
-            <section id="windows-section" class="result-section hidden">
-                <img src="https://img.hh4khq.xyz/desk.png" alt="Giao diện trên Desktop" class="download-image">
-                <p class="download-text">
-                    File cài đặt cho Windows:
-                    <a href="https://src.hh4khq.xyz/hh4khq_v1.1.0.exe" class="download-link">Tải xuống ⬇️</a>
+        </div>
+
+        <div class="top-bar-right">
+            <img src="https://src.hh4khq.xyz/logo.png" alt="Logo">
+        </div>
+    </header>
+
+    <main class="page-wrapper">
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-left">
+                <div class="hero-bubble">Xin chào! ❤️</div>
+                <div class="hero-text-title">
+                    HoatHinh4kHQ là ứng dụng xem hoạt hình chất lượng cao HHTQ và anime.
+                </div>
+                <p class="hero-text-body">
+                    Xem phim không quảng cáo, hỗ trợ 4K HQ, HDR, 10 Bit, tăng tốc phần cứng, âm thanh 5.1,
+                    phụ đề &amp; thuyết minh đa dạng. Ứng dụng hoạt động trên Windows, Android
+                    và sắp hỗ trợ macOS và AndroidTV.
                 </p>
-            </section>
-            
-            <section id="android-section" class="result-section hidden">
-                <img src="https://img.hh4khq.xyz/androi.jpg" alt="Giao diện trên Android" class="download-image">
-                 <p class="download-text">
-                    File APK cho Android:
-                    <a href="https://src.hh4khq.xyz/hh4khq_v1.1.0.apk" class="download-link">Tải xuống ⬇️</a>
+            </div>
+            <div class="hero-right">
+                <div class="hero-avatar">
+                    <img src="https://src.hh4khq.xyz/logo.png" alt="Logo HoatHinh4kHQ">
+                </div>
+            </div>
+        </section>
+
+        <!-- DOWNLOAD -->
+        <section class="download-panel">
+            <div class="download-panel-title">Tải HoatHinh4kHQ</div>
+            <div class="download-cols">
+
+                <div class="download-col">
+                    <h3>🪟 Windows 10+</h3>
+                    <ul>
+                        <li>
+                            <a href="https://src.hh4khq.xyz/hh4khq_2.0.exe">
+                                Trình cài đặt 64-bit
+                            </a>
+                        </li>
+                        <li>
+                            <span class="download-tag">Đề xuất cho PC / Laptop</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="download-col">
+                    <h3>🤖 Android 8+</h3>
+                    <ul>
+                        <li>
+                            <a href="https://src.hh4khq.xyz/hh4khq_2.0.apk">
+                                File APK cài đặt
+                            </a>
+                        </li>
+                        <li>Hỗ trợ điện thoại &amp; TV box</li>
+                    </ul>
+                </div>
+
+                <div class="download-col">
+                    <h3>🍎 macOS</h3>
+                    <ul>
+                        <li>Đang phát triển bản macOS.</li>
+                        <li>Vui lòng theo dõi kênh Telegram để nhận thông báo khi ra mắt.</li>
+                    </ul>
+                </div>
+
+                <div class="download-col">
+                    <h3>📺 AndroidTV</h3>
+                    <ul>
+                        <li>Bản AndroidTV đang được phát triển.</li>
+                        <li>Vui lòng theo dõi kênh Telegram để nhận thông báo khi ra mắt.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- VIP CARDS -->
+        <section class="vip-section">
+            <h2 class="vip-section-title">Bảng giá gói VIP</h2>
+
+            <div class="vip-grid">
+
+                <div class="vip-card">
+                    <div class="vip-card-inner">
+                        <div class="vip-card-title">VIP</div>
+                        <div class="vip-card-sub">1 THÁNG</div>
+                        <div class="vip-card-price">30.000₫</div>
+                        <div class="vip-card-usd">/ 1 USDT</div>
+                    </div>
+                </div>
+
+                <div class="vip-card">
+                    <div class="vip-badge">Best choice</div>
+                    <div class="vip-card-inner">
+                        <div class="vip-card-title">VIP</div>
+                        <div class="vip-card-sub">3 THÁNG</div>
+                        <div class="vip-card-price">80.000₫</div>
+                        <div class="vip-card-usd">/ 3 USDT</div>
+                    </div>
+                </div>
+
+                <div class="vip-card">
+                    <div class="vip-card-inner">
+                        <div class="vip-card-title">VIP</div>
+                        <div class="vip-card-sub">6 THÁNG</div>
+                        <div class="vip-card-price">170.000₫</div>
+                        <div class="vip-card-usd">/ 6 USDT</div>
+                    </div>
+                </div>
+
+                <div class="vip-card">
+                    <div class="vip-card-inner">
+                        <div class="vip-card-title">VIP</div>
+                        <div class="vip-card-sub">1 NĂM</div>
+                        <div class="vip-card-price">300.000₫</div>
+                        <div class="vip-card-usd">/ 10 USDT</div>
+                    </div>
+                </div>
+
+                <div class="vip-card">
+                    <div class="vip-badge">Không giới hạn</div>
+                    <div class="vip-card-inner">
+                        <div class="vip-card-title">VIP</div>
+                        <div class="vip-card-sub">KHÔNG GIỚI HẠN</div>
+                        <div class="vip-card-price">30 USDT</div>
+                        <div class="vip-card-usd">(thanh toán 1 lần)</div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="vip-note">
+                Giá có thể thay đổi theo thời điểm.  
+                Vui lòng xem phần <strong>Hướng dẫn mua</strong> bên dưới để thanh toán và kích hoạt nhanh.
+            </p>
+        </section>
+
+        <!-- INFO SECTIONS -->
+        <section class="info-sections">
+
+            <article class="info-card">
+                <h2>Mua Gói VIP</h2>
+                <p>
+                    Gói VIP giúp bạn trải nghiệm HoatHinh4kHQ trọn vẹn hơn:
                 </p>
-            </section>
-            
-            <section id="macos-section" class="result-section hidden">
-                <p class="notice-text">Đang cập nhật...</p>
-            </section>
-        </main>
-        
-        <aside id="bannerContainer">
-            <img src="https://img.hh4khq.xyz/androi.jpg" alt="Banner ứng dụng" class="banner-image">
-        </aside>
-    </div>
+                <ul>
+                    <li>Xem được toàn bộ kho phim chất lượng cao.</li>
+                    <li>Ưu tiên server nhanh, hạn chế lag / buffering.</li>
+                    <li>Hỗ trợ dự án phát triển thêm bản macOS, Android TV…</li>
+                    <li>Không giới hạn số tập xem mỗi ngày.</li>
+                </ul>
+            </article>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const initialContent = document.getElementById('initial-content');
-            const banner = document.getElementById('bannerContainer');
-            const osButtons = document.querySelectorAll('.choice-btn');
+            <article class="info-card">
+                <h2>Hướng dẫn mua</h2>
+                <p>Để mua gói VIP, bạn chỉ cần:</p>
+                <ul>
+                    <li>Chọn gói phù hợp &amp; xem hướng dẫn chuyển khoản / USDT tại đây.</li>
+                    <li>Sau khi thanh toán, liên hệ admin qua Telegram để kích hoạt nhanh.</li>
+                </ul>
+            </article>
+        </section>
 
-            osButtons.forEach(button => {
-                button.addEventListener('click', function(event) {
-                    event.preventDefault();
-
-                    const os = event.target.dataset.os;
-                    const allSections = document.querySelectorAll('.result-section');
-                    const targetSection = document.getElementById(os + '-section');
-                    
-                    // Hide all sections first to handle back-and-forth clicks
-                    allSections.forEach(s => {
-                        s.classList.add('hidden');
-                        s.classList.remove('visible');
-                    });
-
-                    if (targetSection) {
-                        initialContent.classList.add('hidden');
-                        
-                        // Only hide the main banner if a selection is made
-                        if(window.innerWidth > 1024) {
-                           banner.classList.add('hidden');
-                        }
-
-                        targetSection.classList.remove('hidden');
-                        
-                        // Use a short timeout to allow the display property to change before starting the transition
-                        setTimeout(() => {
-                            targetSection.classList.add('visible');
-                        }, 50);
-                    }
-                });
-            });
-        });
-    </script>
+        <footer>
+            <div class="support">
+                Hỗ trợ: Telegram
+                <a href="https://t.me/hoathinh4khq" target="_blank" rel="noopener noreferrer">
+                    @hoathinh4khq
+                </a>
+            </div>
+            <div>© HoatHinh4kHQ</div>
+        </footer>
+    </main>
 
 </body>
 </html>
